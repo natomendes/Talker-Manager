@@ -17,16 +17,16 @@ const getTalkerById = async (req, res) => {
     return res
       .status(404)
       .json({
-        message: "Pessoa palestrante não encontrada"
+        message: 'Pessoa palestrante não encontrada',
       });
   }
 
   res
     .status(200)
     .json(talker);
-}
+};
 
 module.exports = {
   getAllTalkers,
-  getTalkerById
-}
+  getTalkerById,
+};
