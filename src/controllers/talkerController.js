@@ -1,5 +1,6 @@
 const readFile = require('../utils/readFile');
 const writeFile = require('../utils/writeFile');
+
 const id = {
   value: 5,
 };
@@ -35,12 +36,12 @@ const addTalker = async (req, res) => {
   const newTalker = {
     id: id.value,
     ...req.body,
-  }
+  };
   await writeFile([
     ...talkers,
     newTalker,
   ]);
-  id.value = id.value + 1;
+  id.value += 1;
 
   res.status(201).send(newTalker);
 };
