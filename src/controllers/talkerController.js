@@ -64,9 +64,20 @@ const editTalker = async (req, res) => {
   res.status(200).send(editedTalker);
 };
 
+const deleteTalker = async (req, res) => {
+  const { id: reqId } = req.params;
+  const talkers = await readFile();
+
+  const updatedTalkers = talkers.filter(({ id: talkerId }) => talkerId !== Number(reqId));
+  await writeFile(updatedTalkers);
+
+  res.status(204).send();
+};
+
 module.exports = {
   getAllTalkers,
   getTalkerById,
   addTalker,
   editTalker,
+  deleteTalker,
 };
