@@ -1,4 +1,8 @@
 const readFile = require('../utils/readFile');
+const writeFile = require('../utils/writeFile');
+const id = {
+  value: 5,
+};
 
 const getAllTalkers = async (_req, res) => {
   const talkers = await readFile();
@@ -26,7 +30,23 @@ const getTalkerById = async (req, res) => {
     .json(talker);
 };
 
+const addTalker = async (req, res) => {
+  const talkers = await readFile();
+  const newTalker = {
+    id: id.value,
+    ...req.body,
+  }
+  await writeFile([
+    ...talkers,
+    newTalker,
+  ]);
+  id.value = id.value + 1;
+
+  res.status(201).send(newTalker);
+};
+
 module.exports = {
   getAllTalkers,
   getTalkerById,
+  addTalker,
 };
