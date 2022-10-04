@@ -1,4 +1,5 @@
 const express = require('express');
+const loginRequired = require('../middlewares/loginRequired');
 const validateTalker = require('../middlewares/validateTalker');
 const {
   getAllTalkers,
@@ -12,6 +13,6 @@ router.get('/', getAllTalkers);
 
 router.get('/:id', getTalkerById);
 
-router.post('/', validateTalker, addTalker);
+router.post('/', loginRequired, validateTalker, addTalker);
 
 module.exports = router;
