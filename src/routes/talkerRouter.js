@@ -5,6 +5,7 @@ const {
   getAllTalkers,
   getTalkerById,
   addTalker,
+  editTalker,
 } = require('../controllers/talkerController');
 
 const router = express.Router();
@@ -13,6 +14,10 @@ router.get('/', getAllTalkers);
 
 router.get('/:id', getTalkerById);
 
-router.post('/', loginRequired, validateTalker, addTalker);
+router.use(loginRequired);
+
+router.post('/', validateTalker, addTalker);
+
+router.put('/:id', validateTalker, editTalker);
 
 module.exports = router;

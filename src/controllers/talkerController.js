@@ -46,8 +46,27 @@ const addTalker = async (req, res) => {
   res.status(201).send(newTalker);
 };
 
+const editTalker = async (req, res) => {
+  const talkers = await readFile();
+  const { id: reqId } = req.params;
+  let editedTalker;
+  for (let i = 0; i < talkers.length; i += 1) {
+    if (Number(reqId) === talkers[i].id) {
+      talkers[i] = {
+        ...talkers[i],        
+        ...req.body,
+      }
+      editedTalker = talkers[i];
+    }
+  }
+  await writeFile(talkers);
+  
+  res.status(200).send(editedTalker);
+};
+
 module.exports = {
   getAllTalkers,
   getTalkerById,
   addTalker,
+  editTalker,
 };
