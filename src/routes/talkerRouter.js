@@ -7,9 +7,12 @@ const {
   addTalker,
   editTalker,
   deleteTalker,
+  searchTalkers,
 } = require('../controllers/talkerController');
 
 const router = express.Router();
+
+router.get('/search', loginRequired, searchTalkers);
 
 router.get('/', getAllTalkers);
 
