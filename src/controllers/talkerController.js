@@ -55,7 +55,7 @@ const editTalker = async (req, res) => {
       talkers[i] = {
         ...talkers[i],        
         ...req.body,
-      }
+      };
       editedTalker = talkers[i];
     }
   }
